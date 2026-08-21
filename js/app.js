@@ -70,6 +70,7 @@ class BinauralPlayer {
         document.getElementById('btn-emergency').addEventListener('click', () => {
             this.stop();
             this.updateUI();
+            if (window.timer) window.timer.stop();
         });
     }
 
@@ -127,58 +128,108 @@ class BinauralPlayer {
             this.rightOsc.disconnect();
         }
         this.isPlaying = false;
+        if (window.timer) window.timer.releaseWakeLock();
     }
 }
 
 class SessionTimer {
     constructor() {
-        this.timerInterval = null;
-        this.timeLeft = 0;
+        this.worker = null;
         this.display = document.getElementById('timer-display');
-        
+        this.wakeLock = null;
+        this.totalSeconds = 0;
+        this.initWorker();
         this.initEventListeners();
+    }
+
+    initWorker() {
+        if (window.Worker) {
+            this.worker = new Worker('js/timer-worker.js');
+            this.worker.onmessage = (e) => {
+                const { type, remaining } = e.data;
+                if (type === 'tick') {
+                    this.totalSeconds = remaining;
+                    this.updateDisplay();
+                } else if (type === 'complete') {
+                    this.complete();
+                }
+            };
+        }
+    }
+
+    async requestWakeLock() {
+        if ('wakeLock' in navigator) {
+            try {
+                this.wakeLock = await navigator.wakeLock.request('screen');
+                this.wakeLock.addEventListener('release', () => {
+                    this.wakeLock = null;
+                });
+            } catch (err) {
+                console.log('Wake Lock não disponível:', err);
+            }
+        }
+    }
+
+    releaseWakeLock() {
+        if (this.wakeLock) {
+            this.wakeLock.release();
+            this.wakeLock = null;
+        }
     }
 
     initEventListeners() {
         document.querySelectorAll('.timer-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
+            btn.addEventListener('click', async (e) => {
                 const mins = parseInt(e.target.dataset.min);
                 this.startTimer(mins * 60);
                 
                 document.querySelectorAll('.timer-btn').forEach(b => b.classList.remove('active'));
                 e.target.classList.add('active');
+                
+                await this.requestWakeLock();
             });
         });
     }
 
     startTimer(seconds) {
-        if (this.timerInterval) clearInterval(this.timerInterval);
-        this.timeLeft = seconds;
+        if (!this.worker) {
+            alert('Seu navegador não suporta timer em background. Use um timer externo.');
+            return;
+        }
+        this.worker.postMessage({ command: 'start', seconds });
+    }
+
+    stop() {
+        if (this.worker) {
+            this.worker.postMessage({ command: 'stop' });
+        }
+        this.releaseWakeLock();
+        this.totalSeconds = 0;
         this.updateDisplay();
-        
-        this.timerInterval = setInterval(() => {
-            this.timeLeft--;
-            this.updateDisplay();
-            if (this.timeLeft <= 0) {
-                this.complete();
-            }
-        }, 1000);
+        document.querySelectorAll('.timer-btn').forEach(b => b.classList.remove('active'));
     }
 
     updateDisplay() {
-        this.timeLeft = this.timeLeft < 0 ? 0 : this.timeLeft;
-        const m = Math.floor(this.timeLeft / 60);
-        const s = this.timeLeft % 60;
+        const safeSeconds = Math.max(0, this.totalSeconds);
+        const m = Math.floor(safeSeconds / 60);
+        const s = safeSeconds % 60;
         this.display.innerText = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
     }
 
     complete() {
-        clearInterval(this.timerInterval);
-        this.display.innerText = '00:00';
+        this.totalSeconds = 0;
+        this.updateDisplay();
+        this.releaseWakeLock();
+        document.querySelectorAll('.timer-btn').forEach(b => b.classList.remove('active'));
         
         // Soft alert
         const alertSound = new Audio('https://actions.google.com/sounds/v1/alarms/beep_short.ogg');
         alertSound.play().catch(() => {});
+        
+        // Vibrar se possível
+        if (navigator.vibrate) {
+            navigator.vibrate([500, 200, 500]);
+        }
         
         alert('Sessão finalizada. Inicie o processo de Grounding e Registro.');
     }
