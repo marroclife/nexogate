@@ -4,9 +4,9 @@ App web mobile-first para exploração do Project Gateway (CIA/Monroe) com playe
 
 ## 🌐 URLs
 
-- **Vercel:** https://nexogate-cs0wxhype-marrocs-projects.vercel.app
-- **GitHub Pages:** https://marroclife.github.io/nexogate/
+- **Vercel (oficial):** https://nexogate.vercel.app
 - **Repositório:** https://github.com/marroclife/nexogate
+- **GitHub Pages (mirror):** https://marroclife.github.io/nexogate/
 
 ## 📱 Funcionalidades
 
