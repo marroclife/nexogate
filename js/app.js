@@ -250,6 +250,7 @@ class AppController {
         // Initialize global systems
         window.player = new BinauralPlayer();
         window.timer = new SessionTimer();
+        window.sleep = new SleepMode();
     }
 
     initTabs() {
@@ -376,6 +377,156 @@ class AppController {
             month: 'long', 
             day: 'numeric' 
         });
+    }
+}
+
+class SleepMode {
+    constructor() {
+        this.audioCtx = null;
+        this.oscillators = [];
+        this.gains = [];
+        this.masterGain = null;
+        this.isPlaying = false;
+        this.worker = null;
+        this.wakeLock = null;
+        this.initEventListeners();
+        this.initWorker();
+    }
+
+    initWorker() {
+        if (window.Worker) {
+            this.worker = new Worker('js/timer-worker.js');
+            this.worker.onmessage = (e) => {
+                const { type } = e.data;
+                if (type === 'complete') {
+                    this.stopWithFade();
+                }
+            };
+        }
+    }
+
+    initEventListeners() {
+        const btn = document.getElementById('btn-sleep-chord');
+        if (btn) {
+            btn.addEventListener('click', () => {
+                if (this.isPlaying) {
+                    this.stopWithFade();
+                } else {
+                    this.start();
+                }
+            });
+        }
+
+        const timerBtns = document.querySelectorAll('.sleep-timer-btn');
+        timerBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                timerBtns.forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+            });
+        });
+    }
+
+    async requestWakeLock() {
+        if ('wakeLock' in navigator) {
+            try {
+                this.wakeLock = await navigator.wakeLock.request('screen');
+            } catch (err) {
+                console.log('Wake Lock não disponível:', err);
+            }
+        }
+    }
+
+    releaseWakeLock() {
+        if (this.wakeLock) {
+            this.wakeLock.release();
+            this.wakeLock = null;
+        }
+    }
+
+    getDuration() {
+        const active = document.querySelector('.sleep-timer-btn.active');
+        if (!active) return 8 * 3600;
+        const min = parseInt(active.dataset.min);
+        return min * 60;
+    }
+
+    async start() {
+        await this.initAudio();
+
+        if (window.player) window.player.stop();
+        if (window.timer) window.timer.stop();
+
+        const baseFreq = 110;
+        const frequencies = [baseFreq, baseFreq + 2, baseFreq + 0.5, baseFreq - 0.5];
+
+        this.masterGain = this.audioCtx.createGain();
+        this.masterGain.gain.setValueAtTime(0.0001, this.audioCtx.currentTime);
+        this.masterGain.connect(this.audioCtx.destination);
+
+        frequencies.forEach((freq) => {
+            const osc = this.audioCtx.createOscillator();
+            const gain = this.audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, this.audioCtx.currentTime);
+            gain.gain.setValueAtTime(0.08, this.audioCtx.currentTime);
+            osc.connect(gain);
+            gain.connect(this.masterGain);
+            osc.start();
+            this.oscillators.push(osc);
+            this.gains.push(gain);
+        });
+
+        this.masterGain.gain.exponentialRampToValueAtTime(0.25, this.audioCtx.currentTime + 8);
+
+        this.isPlaying = true;
+        this.updateUI();
+
+        const duration = this.getDuration();
+        if (this.worker && duration !== Infinity) {
+            this.worker.postMessage({ command: 'start', seconds: duration });
+        }
+
+        await this.requestWakeLock();
+    }
+
+    stopWithFade() {
+        if (!this.isPlaying || !this.audioCtx) return;
+
+        const now = this.audioCtx.currentTime;
+        this.masterGain.gain.cancelScheduledValues(now);
+        this.masterGain.gain.setValueAtTime(this.masterGain.gain.value, now);
+        this.masterGain.gain.exponentialRampToValueAtTime(0.0001, now + 5);
+
+        setTimeout(() => {
+            this.oscillators.forEach(osc => {
+                try { osc.stop(); } catch (e) {}
+                osc.disconnect();
+            });
+            this.gains.forEach(g => g.disconnect());
+            this.oscillators = [];
+            this.gains = [];
+            if (this.masterGain) this.masterGain.disconnect();
+            this.isPlaying = false;
+            this.releaseWakeLock();
+            this.updateUI();
+        }, 5000);
+    }
+
+    async initAudio() {
+        if (!this.audioCtx) {
+            this.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (this.audioCtx.state === 'suspended') {
+            await this.audioCtx.resume();
+        }
+    }
+
+    updateUI() {
+        const btn = document.getElementById('btn-sleep-chord');
+        if (btn) {
+            btn.innerText = this.isPlaying ? 'Parar Sono Profundo' : 'Iniciar Sono Profundo';
+            btn.classList.toggle('active', this.isPlaying);
+        }
     }
 }
 
