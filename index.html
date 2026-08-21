@@ -2,386 +2,262 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Gateway | Manual Operacional NEXO</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>NEXO Gateway | Mobile</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0a0a0a">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@300;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <nav class="sidebar">
-        <div class="logo">NEXO<span>GATEWAY</span></div>
-        <ul>
-            <li><a href="#intro">Introdução</a></li>
-            <li><a href="#teoria">Teoria Profunda</a></li>
-            <li><a href="#hemisync">Hemi-Sync</a></li>
-            <li><a href="#focus">Focus Levels</a></li>
-            <li><a href="#como-alcancar">Como Alcançar</a></li>
-            <li><a href="#waves">Waves Monroe</a></li>
-            <li><a href="#protocolo">Protocolo NEXO</a></li>
-            <li><a href="#player">Binaural Player</a></li>
-            <li><a href="#prompts">Afirmações</a></li>
-            <li><a href="#registro">Registro</a></li>
-            <li><a href="#seguranca">Segurança</a></li>
-        </ul>
-    </nav>
+    <div id="app">
+        <header class="app-header">
+            <div class="logo">NEXO<span class="logo-accent">GATEWAY</span></div>
+            <button id="btn-emergency" class="emergency-btn">PARAR TUDO</button>
+        </header>
 
-    <main class="content">
-        <section id="intro" class="section">
-            <h1>Project Gateway</h1>
-            <p class="subtitle">Análise e Avaliação do Processo Gateway</p>
-            <div class="card">
-                <p>O <strong>Project Gateway</strong> foi um estudo conduzido pela CIA em 1983, baseado no trabalho do <em>Monroe Institute</em>. O documento, escrito por Wayne McDonnell, analisa a viabilidade de utilizar estados alterados de consciência para a inteligência militar, espionagem remota e projeção da consciência.</p>
-                <p>O núcleo do projeto é a técnica de <strong>Hemi-Sync</strong>, que visa sincronizar os dois hemisférios cerebrais para acessar dimensões da realidade além do espaço-tempo físico.</p>
-            </div>
-        </section>
+        <main id="main-content">
+            <!-- Tab: Home -->
+            <section id="tab-home" class="tab-content active">
+                <div class="hero-card">
+                    <h1>Bem-vindo, Operador</h1>
+                    <p>Sintonize sua frequência e expanda a percepção.</p>
+                    <button class="btn-primary" onclick="app.switchTab('sessions')">Iniciar Sessão</button>
+                </div>
 
-        <section id="teoria" class="section">
-            <h2>Teoria Profunda</h2>
-            
-            <div class="grid">
-                <div class="card">
-                    <h3>Itzhak Bentov</h3>
-                    <p>A consciência é vista como uma onda. O corpo humano atua como um oscilador que, ao entrar em ressonância com a Terra (frequências de 7-7.5 Hz), permite a expansão da percepção. Bentov descreve os ventrículos cerebrais como câmaras de ressonância e a Kundalini como uma onda estacionária que eleva a consciência.</p>
-                </div>
-                <div class="card">
-                    <h3>Karl Pribram</h3>
-                    <p>Propôs o <strong>Cérebro Holográfico</strong>. Em vez de a memória estar localizada em um ponto específico, ela estaria distribuída por todo o cérebro através de padrões de interferência, similar a um holograma, onde cada parte contém a informação do todo.</p>
-                </div>
-                <div class="card">
-                    <h3>David Bohm</h3>
-                    <p>Introduziu a <strong>Ordem Implicada</strong> (o todo indiviso e invisível) e a <strong>Ordem Explicada</strong> (a realidade manifesta que percebemos). O universo seria um holograma onde a separação entre observador e objeto é uma ilusão.</p>
-                </div>
-                <div class="card">
-                    <h3>Modelo Toroidal</h3>
-                    <p>Tanto o universo quanto o corpo humano operam em geometrias toroidais (em forma de rosca). A energia flui em ciclos de expansão e contração, criando vórtices de consciência que permitem a navegação entre dimensões.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="hemisync" class="section">
-            <h2>Hemi-Sync Explicado</h2>
-            <div class="card">
-                <p>O <strong>Hemi-Sync (Hemispheric Synchronization)</strong> utiliza a frequência de seguimento da frequência (FFR) através de batidas binaurais. Ao enviar frequências ligeiramente diferentes para cada ouvido, o cérebro "cria" uma terceira frequência (a diferença entre as duas), forçando a sincronia dos hemisférios.</p>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Estado</th>
-                            <th>Frequência</th>
-                            <th>Características</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Beta</td>
-                            <td>13 - 30 Hz</td>
-                            <td>Alerta, pensamento lógico, estresse.</td>
-                        </tr>
-                        <tr>
-                            <td>Alpha</td>
-                            <td>8 - 13 Hz</td>
-                            <td>Relaxamento, visualização, meditação leve.</td>
-                        </tr>
-                        <tr>
-                            <td>Theta</td>
-                            <td>4 - 8 Hz</td>
-                            <td>Sono leve, sonhos lúcidos, acesso ao subconsciente.</td>
-                        </tr>
-                        <tr>
-                            <td>Delta</td>
-                            <td>0.5 - 4 Hz</td>
-                            <td>Sono profundo, regeneração, estados transcendentais.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <section id="focus" class="section">
-            <h2>Focus Levels (Níveis de Foco)</h2>
-            <p>Os Focus Levels são "coordenadas" de consciência. Para navegar, é necessário ajustar a vibração interna para coincidir com a frequência do nível.</p>
-            <div class="focus-grid">
-                <div class="focus-card" data-level="F10">
-                    <h4>Focus 10</h4>
-                    <span class="tag">Mente Desperta / Corpo Dormindo</span>
-                    <p>O estado básico de separação. O corpo físico está profundamente relaxado, mas a mente permanece alerta.</p>
-                    <strong>Objetivo:</strong> Estabilizar a consciência fora da percepção sensorial.
-                </div>
-                <div class="focus-card" data-level="F12">
-                    <h4>Focus 12</h4>
-                    <span class="tag">Expansão da Consciência</span>
-                    <p>Estado de conscientização expandida. Percebe-se a energia ao redor do corpo.</p>
-                    <strong>Objetivo:</strong> Ampliar a percepção sensorial para além do físico.
-                </div>
-                <div class="focus-card" data-level="F15">
-                    <h4>Focus 15</h4>
-                    <span class="tag">Estado de Agora</span>
-                    <p>O ponto zero. Não há tempo, nem espaço, nem ego. Apenas a existência pura.</p>
-                    <strong>Objetivo:</strong> Desapego total e cura profunda.
-                </div>
-                <div class="focus-card" data-level="F21">
-                    <h4>Focus 21</h4>
-                    <span class="tag">Acesso ao Sistema de Conhecimento</span>
-                    <p>A ponte para a Akasha. Acesso a informações não locais e memórias universais.</p>
-                    <strong>Objetivo:</strong> Obter insights e respostas complexas.
-                </div>
-                <div class="focus-card" data-level="F22">
-                    <h4>Focus 22</h4>
-                    <span class="tag">Vida Após a Morte / Santuário</span>
-                    <p>Realidade de transição pós-física. Encontro com consciências que deixaram o corpo físico.</p>
-                    <strong>Objetivo:</strong> Compreensão da continuidade da consciência e contato com entidades desencarnadas.
-                </div>
-                <div class="focus-card" data-level="F23">
-                    <h4>Focus 23</h4>
-                    <span class="tag">Inanimado / Vazio</span>
-                    <p>Estado de ausência de atividade consciencial ativa. Usado para descanso, limpeza e desidentificação.</p>
-                    <strong>Objetivo:</strong> Recuperação energética e dissolução temporária do ego.
-                </div>
-                <div class="focus-card" data-level="F24">
-                    <h4>Focus 24</h4>
-                    <span class="tag">Ativo Consciente / Coletivo de Crenças</span>
-                    <p>Nível onde sistemas de crença coletivos se manifestam como estruturas percebíveis.</p>
-                    <strong>Objetivo:</strong> Estudar e navegar padrões culturais, sociais e de massa.
-                </div>
-                <div class="focus-card" data-level="F25">
-                    <h4>Focus 25</h4>
-                    <span class="tag">Crenças / Padrões Históricos</span>
-                    <p>Acesso a padrões culturais, históricos e arquetípicos que moldam a experiência humana.</p>
-                    <strong>Objetivo:</strong> Compreender e ressignificar crenças pessoais e coletivas.
-                </div>
-                <div class="focus-card" data-level="F26">
-                    <h4>Focus 26</h4>
-                    <span class="tag">Seres de Luz / Mentores</span>
-                    <p>Interação com entidades de orientação, mentores espirituais ou arquétipos superiores.</p>
-                    <strong>Objetivo:</strong> Receber orientação, ensinamento e alinhamento com propósito maior.
-                </div>
-                <div class="focus-card" data-level="F27">
-                    <h4>Focus 27</h4>
-                    <span class="tag">O Park / Ponto de Encontro</span>
-                    <p>Local de planejamento, integração e encontro. Ponto de retorno seguro entre jornadas.</p>
-                    <strong>Objetivo:</strong> Integrar experiências, planejar próximos passos e retornar com estabilidade.
-                </div>
-            </div>
-        </section>
-
-        <section id="como-alcancar" class="section">
-            <h2>Como Alcançar Cada Foco</h2>
-            <div class="card">
-                <p>Cada Focus Level não é um lugar, mas uma <strong>configuração de consciência</strong>. Você não "vai até lá" — você sintoniza sua frequência para coincidir com ele. Abaixo, instruções práticas resumidas.</p>
-                <table class="table">
-                    <thead>
-                        <tr><th>Foco</th><th>Chave de Acesso</th><th>Prática</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>F10</strong></td>
-                            <td>Relaxamento total + mente alerta</td>
-                            <td>Deite-se em posição semi-reclinada. Use o player F10. Deixe o corpo "afundar" enquanto a consciência observa. Não durma.</td>
-                        </tr>
-                        <tr>
-                            <td><strong>F12</strong></td>
-                            <td>Deslocamento da atenção para fora do corpo</td>
-                            <td>A partir do F10, mova a atenção para o topo da cabeça ou para o espaço ao redor do corpo. Sinta o campo ao redor.</td>
-                        </tr>
-                        <tr>
-                            <td><strong>F15</strong></td>
-                            <td>Solução da linha do tempo</td>
-                            <td>No F12, afirme: "Agora dissolve o tempo." Permita que passado, presente e futuro ocupem o mesmo espaço. Observe sem julgar.</td>
-                        </tr>
-                        <tr>
-                            <td><strong>F21</strong></td>
-                            <td>Endereçar uma pergunta ou intenção</td>
-                            <td>No F15, formule uma pergunta clara. Não force a resposta. Mantenha a intenção como farol e aguarde o insight emergir.</td>
-                        </tr>
-                        <tr>
-                            <td><strong>F22–27</strong></td>
-                            <td>Surrender + direcionamento de propósito</td>
-                            <td>Modos avançados. Requerem F10/F12 estáveis. Use afirmações específicas (ex: "Vou ao Park em F27 para integrar").</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <section id="waves" class="section">
-            <h2>Waves do Monroe Institute</h2>
-            <div class="card">
-                <ul class="waves-list">
-                    <li><strong>Wave I:</strong> Introdução ao Hemi-Sync e relaxamento profundo.</li>
-                    <li><strong>Wave II:</strong> Exploração do Focus 10 e separação consciente.</li>
-                    <li><strong>Wave III:</strong> Navegação avançada e exploração de estados fora do corpo.</li>
-                    <li><strong>Wave IV:</strong> Acesso a dimensões superiores e a "estrada de luz".</li>
-                    <li><strong>Wave V:</strong> Domínio de técnicas de projeção e retorno consciente.</li>
-                    <li><strong>Wave VI:</strong> Integração total da consciência expandida na vida diária.</li>
-                    <li><strong>Wave VII:</strong> Mestria dimensional e serviço universal.</li>
-                </ul>
-            </div>
-        </section>
-
-        <section id="protocolo" class="section">
-            <h2>Protocolo Passo a Passo NEXO</h2>
-            <div class="step-container">
-                <div class="step">
-                    <div class="step-num">1</div>
-                    <div class="step-text">
-                        <h3>Preparação</h3>
-                        <p>Ambiente escuro, temperatura amena. Posição reclinada (não totalmente deitado para evitar sono). Conversão de energia: visualize a energia fluindo do topo da cabeça até os pés. Afirme: <em>"Eu sou a consciência pura, operando com segurança e propósito."</em></p>
+                <div class="dashboard-grid">
+                    <div class="status-card">
+                        <h3>Status do Dia</h3>
+                        <p id="date-display">--/--/----</p>
+                        <div class="status-indicator">Sincronizado</div>
+                    </div>
+                    <div class="summary-card">
+                        <h3>Resumo de Focos</h3>
+                        <div class="focus-summary">
+                            <span class="sum-item">F10 <span>Base</span></span>
+                            <span class="sum-item">F15 <span>Agora</span></span>
+                            <span class="sum-item">F21 <span>Akasha</span></span>
+                        </div>
                     </div>
                 </div>
-                <div class="step">
-                    <div class="step-num">2</div>
-                    <div class="step-text">
-                        <h3>Entrada</h3>
-                        <p>Respiração rítmica. Inicie o player binaural. Sinta a vibração no centro da testa. Module a respiração para "elevar" a vibração, sentindo o corpo tornar-se leve e a mente expandir.</p>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-num">3</div>
-                    <div class="step-text">
-                        <h3>Operação</h3>
-                        <p>Defina a intenção (ex: "Quero acessar Focus 21 para entender X"). Navegue por intenção, não por esforço. Se houver resistência, retorne ao F10 e tente novamente.</p>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-num">4</div>
-                    <div class="step-text">
-                        <h3>Retorno e Integração</h3>
-                        <p>Retorno gradual. Sinta o peso do corpo físico. Grounding: imagine raízes saindo dos pés para a Terra. Registre imediatamente os insights no template de registro.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <section id="player" class="section">
-            <h2>Binaural Player NEXO</h2>
-            <div class="player-container">
-                <div class="player-controls">
-                    <label for="volume">Volume</label>
-                    <input type="range" id="volume" min="0" max="1" step="0.1" value="0.5">
+                <div class="quick-links">
+                    <h3>Navegação Rápida</h3>
+                    <div class="link-grid">
+                        <div class="link-item" onclick="app.switchTab('focos')">🎯 Focos</div>
+                        <div class="link-item" onclick="app.switchTab('teoria')">📚 Teoria</div>
+                        <div class="link-item" onclick="app.switchTab('protocolo')">🛡️ Protocolo</div>
+                        <div class="link-item" onclick="app.switchTab('registro')">📝 Registros</div>
+                    </div>
                 </div>
-                <div class="frequencies-grid">
-                    <div class="freq-card" data-base="100" data-diff="4">
-                        <h4>Focus 10</h4>
-                        <p>Theta (4Hz) - Relaxamento</p>
+            </section>
+
+            <!-- Tab: Sessions (Player) -->
+            <section id="tab-sessions" class="tab-content">
+                <h2>Sessões Binaural</h2>
+                
+                <div class="player-global-controls">
+                    <div class="vol-container">
+                        <label>Volume</label>
+                        <input type="range" id="volume" min="0" max="1" step="0.01" value="0.5">
+                    </div>
+                    <div class="timer-container">
+                        <label>Timer</label>
+                        <div class="timer-options">
+                            <button class="timer-btn" data-min="5">5m</button>
+                            <button class="timer-btn" data-min="15">15m</button>
+                            <button class="timer-btn" data-min="30">30m</button>
+                            <button class="timer-btn" data-min="60">60m</button>
+                        </div>
+                        <div id="timer-display" class="timer-display">00:00</div>
+                    </div>
+                </div>
+
+                <div class="player-grid">
+                    <div class="session-card" data-base="100" data-diff="4">
+                        <div class="card-info">
+                            <h4>Focus 10</h4>
+                            <span class="card-tag">Theta (4Hz)</span>
+                            <p>Mente Desperta / Corpo Dormindo</p>
+                        </div>
                         <button class="play-btn">Iniciar</button>
                     </div>
-                    <div class="freq-card" data-base="100" data-diff="6">
-                        <h4>Focus 12</h4>
-                        <p>Theta (6Hz) - Expansão</p>
+                    <div class="session-card" data-base="100" data-diff="6">
+                        <div class="card-info">
+                            <h4>Focus 12</h4>
+                            <span class="card-tag">Theta (6Hz)</span>
+                            <p>Expansão da Consciência</p>
+                        </div>
                         <button class="play-btn">Iniciar</button>
                     </div>
-                    <div class="freq-card" data-base="100" data-diff="2">
-                        <h4>Focus 15</h4>
-                        <p>Delta (2Hz) - Agora</p>
+                    <div class="session-card" data-base="100" data-diff="2">
+                        <div class="card-info">
+                            <h4>Focus 15</h4>
+                            <span class="card-tag">Delta (2Hz)</span>
+                            <p>O Estado de Agora</p>
+                        </div>
                         <button class="play-btn">Iniciar</button>
                     </div>
-                    <div class="freq-card" data-base="100" data-diff="1">
-                        <h4>Focus 21</h4>
-                        <p>Delta (1Hz) - Akasha</p>
+                    <div class="session-card" data-base="100" data-diff="1">
+                        <div class="card-info">
+                            <h4>Focus 21</h4>
+                            <span class="card-tag">Delta (1Hz)</span>
+                            <p>Acesso ao Sistema de Conhecimento</p>
+                        </div>
                         <button class="play-btn">Iniciar</button>
                     </div>
-                    <div class="freq-card" data-base="100" data-diff="0.5">
-                        <h4>Focus 27</h4>
-                        <p>Deep Delta (0.5Hz) - Unidade</p>
+                    <div class="session-card" data-base="100" data-diff="0.5">
+                        <div class="card-info">
+                            <h4>Focus 27</h4>
+                            <span class="card-tag">Deep Delta (0.5Hz)</span>
+                            <p>O Park / Ponto de Encontro</p>
+                        </div>
                         <button class="play-btn">Iniciar</button>
                     </div>
                 </div>
-                <p class="warning">⚠️ Use fones de ouvido para que o efeito binaural funcione.</p>
-            </div>
-        </section>
+                <p class="warning">⚠️ Use fones de ouvido para o efeito binaural.</p>
+            </section>
 
-        <section id="prompts" class="section">
-            <h2>Biblioteca de Afirmações</h2>
-            <div class="prompt-grid">
-                <div class="prompt-category">
-                    <h3>🎯 Foco & Estabilidade</h3>
+            <!-- Tab: Focos -->
+            <section id="tab-focos" class="tab-content">
+                <h2>Níveis de Foco</h2>
+                <div class="expandable-list" id="focos-list">
+                    <!-- Populated by JS -->
+                </div>
+            </section>
+
+            <!-- Tab: Teoria -->
+            <section id="tab-teoria" class="tab-content">
+                <h2>Teoria Profunda</h2>
+                <div class="theory-stack">
+                    <div class="theory-card">
+                        <h3>Itzhak Bentov</h3>
+                        <p>A consciência é vista como uma onda. O corpo humano atua como um oscilador em ressonância com a Terra (7-7.5 Hz), permitindo a expansão da percepção.</p>
+                    </div>
+                    <div class="theory-card">
+                        <h3>Karl Pribram</h3>
+                        <p>Propôs o <strong>Cérebro Holográfico</strong>. A memória estaria distribuída por todo o cérebro através de padrões de interferência.</p>
+                    </div>
+                    <div class="theory-card">
+                        <h3>David Bohm</h3>
+                        <p>Introduziu a <strong>Ordem Implicada</strong> (todo indiviso) e a <strong>Ordem Explicada</strong> (realidade manifesta). O universo é um holograma.</p>
+                    </div>
+                    <div class="theory-card">
+                        <h3>Modelo Toroidal</h3>
+                        <p>A energia flui em ciclos de expansão e contração, criando vórtices de consciência que permitem a navegação dimensional.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab: Protocolo -->
+            <section id="tab-protocolo" class="tab-content">
+                <h2>Protocolo NEXO</h2>
+                <div class="protocol-steps">
+                    <div class="p-step">
+                        <div class="p-num">1</div>
+                        <div class="p-body">
+                            <h3>Preparação</h3>
+                            <p>Ambiente escuro. Posição reclinada. Visualização de energia do topo da cabeça aos pés.</p>
+                            <div class="p-affirmation">"Eu sou a consciência pura, operando com segurança e propósito."</div>
+                        </div>
+                    </div>
+                    <div class="p-step">
+                        <div class="p-num">2</div>
+                        <div class="p-body">
+                            <h3>Entrada</h3>
+                            <p>Respiração rítmica. Inicie o player. Sinta a vibração na testa e eleve a consciência.</p>
+                        </div>
+                    </div>
+                    <div class="p-step">
+                        <div class="p-num">3</div>
+                        <div class="p-body">
+                            <h3>Operação</h3>
+                            <p>Defina a intenção. Navegue por intenção, não por esforço. Se houver resistência, retorne ao F10.</p>
+                        </div>
+                    </div>
+                    <div class="p-step">
+                        <div class="p-num">4</div>
+                        <div class="p-body">
+                            <h3>Retorno</h3>
+                            <p>Retorno gradual. Grounding: raízes saindo dos pés para a Terra. Registre os insights.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="safety-box">
+                    <h3>🛡️ Segurança</h3>
                     <ul>
-                        <li><code class="copyable">"Minha mente está calma, meu corpo está dormindo, minha consciência está desperta."</code></li>
-                        <li><code class="copyable">"Eu ancoro minha consciência no centro do Focus 10."</code></li>
+                        <li>Não use se tiver epilepsia ou convulsões.</li>
+                        <li>Sempre use timer para retorno.</li>
+                        <li>Retorno gradual: F27 → F21 → F12 → F10 → Físico.</li>
                     </ul>
                 </div>
-                <div class="prompt-category">
-                    <h3>💡 Insight & Criatividade</h3>
-                    <ul>
-                        <li><code class="copyable">"Eu abro os canais de percepção para a verdade absoluta sobre [ASSUNTO]."</code></li>
-                        <li><code class="copyable">"Que a resposta flua para mim de forma clara e compreensível."</code></li>
-                    </ul>
-                </div>
-                <div class="prompt-category">
-                    <h3>🛡️ Decisão & Proteção</h3>
-                    <ul>
-                        <li><code class="copyable">"Eu opero sob a luz da minha vontade superior e proteção divina."</code></li>
-                        <li><code class="copyable">"Apenas a verdade e a luz podem entrar em meu campo de consciência."</code></li>
-                    </ul>
-                </div>
-                <div class="prompt-category">
-                    <h3>🌊 Sanar Bloqueios</h3>
-                    <ul>
-                        <li><code class="copyable">"Eu libero todas as tensões físicas e mentais agora."</code></li>
-                        <li><code class="copyable">"Eu dissolve a barreira entre meu ego e minha essência."</code></li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="registro" class="section">
-            <h2>Template de Registro Pós-Sessão</h2>
-            <div class="card">
-                <form class="registro-form">
-                    <div class="form-group">
-                        <label>Data e Hora</label>
-                        <input type="datetime-local">
+            <!-- Tab: Registro -->
+            <section id="tab-registro" class="tab-content">
+                <h2>Registro de Sessão</h2>
+                <form class="mobile-form" id="session-form">
+                    <div class="input-group">
+                        <label>Data/Hora</label>
+                        <input type="datetime-local" id="reg-date">
                     </div>
-                    <div class="form-group">
+                    <div class="input-group">
                         <label>Foco Alcançado</label>
-                        <select>
-                            <option>F10</option>
-                            <option>F12</option>
-                            <option>F15</option>
-                            <option>F21</option>
-                            <option>F22</option>
-                            <option>F23</option>
-                            <option>F24</option>
-                            <option>F25</option>
-                            <option>F26</option>
-                            <option>F27</option>
+                        <select id="reg-foco">
+                            <option>F10</option><option>F12</option><option>F15</option>
+                            <option>F21</option><option>F22</option><option>F23</option>
+                            <option>F24</option><option>F25</option><option>F26</option><option>F27</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label>Intenção Inicial</label>
-                        <textarea rows="2"></textarea>
+                    <div class="input-group">
+                        <label>Intenção</label>
+                        <textarea id="reg-intent" rows="2"></textarea>
                     </div>
-                    <div class="form-group">
-                        <label>Sensações & Insights</label>
-                        <textarea rows="4"></textarea>
+                    <div class="input-group">
+                        <label>Insights</label>
+                        <textarea id="reg-insights" rows="4"></textarea>
                     </div>
-                    <div class="form-group">
-                        <label>Validação (Sincronicidades posteriores)</label>
-                        <textarea rows="2"></textarea>
-                    </div>
-                    <button type="button" class="btn-submit" id="btnSalvarRegistro">Copiar Registro</button>
+                    <button type="button" class="btn-submit" id="btn-save-reg">Salvar Registro</button>
                 </form>
-            </div>
-        </section>
 
-        <section id="seguranca" class="section">
-            <h2>Checklist de Segurança</h2>
-            <div class="card safety-card">
-                <ul class="safety-list">
-                    <li><strong>Contraindicações:</strong> Não utilize se tiver epilepsia, histórico de convulsões ou estiver sob efeito de sedativos fortes.</li>
-                    <li><strong>Timer:</strong> Sempre utilize um timer para retorno. Não tente "ficar" em estados profundos por tempo indeterminado sem treino.</li>
-                    <li><strong>Retorno Gradual:</strong> Nunca "salte" do F27 para o estado acordado instantaneamente. Desça pelos níveis (F21 -> F12 -> F10 -> Físico).</li>
-                    <li><strong>Integração:</strong> Beba água e caminhe descalço na terra/grama após sessões intensas.</li>
-                </ul>
-            </div>
-        </section>
-    </main>
+                <div class="history-section">
+                    <h3>Histórico Recente</h3>
+                    <div id="reg-history" class="history-list">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </section>
+        </main>
 
-    <footer>
-        <p><strong>Instruções de Abertura:</strong> Para abrir este site, basta localizar o arquivo <code>index.html</code> na pasta <code>vault/research/project-gateway/site/</code> e abri-lo com qualquer navegador moderno (Chrome, Firefox, Edge). Não é necessário servidor.</p>
-        <p>© 2026 NEXO Operacional | Projeto Gateway</p>
-    </footer>
+        <nav class="bottom-nav">
+            <div class="nav-item active" data-tab="home">
+                <span class="nav-icon">🏠</span>
+                <span class="nav-label">Home</span>
+            </div>
+            <div class="nav-item" data-tab="sessions">
+                <span class="nav-icon">🎧</span>
+                <span class="nav-label">Sessão</span>
+            </div>
+            <div class="nav-item" data-tab="focos">
+                <span class="nav-icon">🎯</span>
+                <span class="nav-label">Focos</span>
+            </div>
+            <div class="nav-item" data-tab="teoria">
+                <span class="nav-icon">📚</span>
+                <span class="nav-label">Teoria</span>
+            </div>
+            <div class="nav-item" data-tab="protocolo">
+                <span class="nav-icon">🛡️</span>
+                <span class="nav-label">Protocolo</span>
+            </div>
+            <div class="nav-item" data-tab="registro">
+                <span class="nav-icon">📝</span>
+                <span class="nav-label">Registro</span>
+            </div>
+        </nav>
+    </div>
 
     <script src="js/app.js"></script>
 </body>
